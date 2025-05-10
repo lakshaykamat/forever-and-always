@@ -1,7 +1,7 @@
 # 💖 Our Love Timer
 
 This is not just a timer — it's a heartbeat.  
-It counts the moments since **April 25, 2025 at 11:30 PM** —  
+It counts the moments since **DATE** —  
 when our forever began. ✨
 
 Every second that passes is a reminder of how much you mean to me.  
