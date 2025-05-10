@@ -55,12 +55,14 @@
       <span id="dateDisplay"></span>
     </div>
 
+    
+
     <div class="unit-toggle">
       <select id="unitSelect" class="p-2 rounded bg-white/10 text-white">
-        <option value="single-weeks" selected>Weeks</option>
+        <option value="single-weeks" >Weeks</option>
         <option value="full">Years, Months, Days</option>
         <option value="ym">Years & Months</option>
-        <option value="days-hours">Days & Hours</option>
+        <option value="days-hours" selected>Days & Hours</option>
         <option value="single-days">Days</option>
         <option value="single-hours">Hours</option>
         <option value="single-minutes">Minutes</option>
@@ -183,7 +185,7 @@
           displayString = `${minutes} ${plural("minute", minutes)} ago`;
         else displayString = "just now";
 
-        dateDisplay.textContent = `Our hearts met on April 25, 2025 at 11:30PM — ${displayString}`;
+        dateDisplay.textContent = `Our hearts met on ${displayString}`;
       }
 
       updateDisplay();
