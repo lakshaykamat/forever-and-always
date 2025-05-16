@@ -1,221 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
- <head>
+<head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
   <title>Our Love Timer – A Beautiful Romantic Time Tracker</title>
   <meta name="description" content="Celebrate your love with Our Love Timer — a romantic web app that tracks your relationship journey in weeks, days, hours, and more." />
   <meta name="author" content="Your Name" />
   <meta name="keywords" content="love timer, relationship tracker, romantic app, date counter, love duration, anniversary tracker" />
 
-  <!-- Open Graph for social sharing -->
+  <!-- Open Graph & Twitter Card -->
   <meta property="og:title" content="Our Love Timer" />
   <meta property="og:description" content="Track your romantic journey beautifully with our interactive love timer." />
-  <!-- <meta property="og:image" content="https://lakshaykamat.github.io/forever-and-always/preview.jpg" /> -->
   <meta property="og:url" content="https://lakshaykamat.github.io/forever-and-always/" />
   <meta property="og:type" content="website" />
-
-  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Our Love Timer" />
   <meta name="twitter:description" content="Celebrate every moment with your love using this beautiful relationship timer." />
-  <!-- <meta name="twitter:image" content="https://lakshaykamat.github.io/forever-and-always/preview.jpg" /> -->
-
-  <!-- Favicon -->
-  <!-- <link rel="icon" href="/favicon.ico" /> -->
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
 
   <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&family=Parisienne&display=swap" rel="stylesheet" />
 
-  <!-- Optional theme color -->
+  <!-- Styles and Theme -->
   <meta name="theme-color" content="#928dab" />
+  <link rel="stylesheet" href="style.css" />
 </head>
+<body class="min-h-screen flex flex-col items-center justify-center p-4">
+  <div class="absolute top-4 w-full text-center text-xl opacity-75">
+    <span id="dateDisplay"></span>
+  </div>
 
-    <style>
-      body {
-        font-family: "Poppins", sans-serif;
-        background: radial-gradient(circle, #1f1c2c, #928dab);
-        color: #fff;
-        overflow: hidden;
-      }
-      .romantic-font {
-        font-family: "Parisienne", cursive;
-      }
-      .gradient-text {
-        background: linear-gradient(135deg, #fbc2eb, #a6c1ee);
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
-      }
-      .unit-toggle {
-        position: absolute;
-        bottom: 20px;
-        right: 20px;
-        font-size: 0.7rem;
-      }
-      option,optgroup {
-        background: #1f1c2c;
-        color: #fff;
-        font-size: 0.7rem;
-      }
-      .bg-glass {
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(10px);
-        border-radius: 1rem;
-      }
-    </style>
-  </head>
-  <body class="min-h-screen flex flex-col items-center justify-center p-4">
-    <div class="absolute top-4 w-full text-center text-xl opacity-75">
-      <span id="dateDisplay"></span>
-    </div>
+  <div class="unit-toggle">
+    <select id="unitSelect" class="p-2 rounded bg-white/10 text-white">
+      <optgroup label="Multiple Units">
+        <option value="ym">Years & Months</option>
+        <option value="full">Years, Months, Days</option>
+        <option value="days-hours" selected>Days & Hours</option>
+      </optgroup>
+      <optgroup label="Single Units">
+        <option value="single-years">Years</option>
+        <option value="single-months">Months</option>
+        <option value="single-weeks">Weeks</option>
+      </optgroup>
+    </select>
+  </div>
 
-    
+  <h1 class="text-5xl md:text-8xl romantic-font gradient-text mb-4 text-center">Forever & Always</h1>
+  <p class="text-lg md:text-xl italic text-pink-100 mb-6 text-center">Our journey of love began...</p>
 
-    <div class="unit-toggle">
-      <select id="unitSelect" class="p-2 rounded bg-white/10 text-white">
-        <optgroup label="Multiple Units">
-          <option value="ym">Years & Months</option>
-          <option value="full">Years, Months, Days</option>
-          <option value="days-hours" selected>Days & Hours</option>
-        </optgroup>
-        <optgroup label="Single Units">
-          <option value="single-years">Years</option>
-          <option value="single-months">Months</option>
-          <option value="single-weeks" >Weeks</option>
-          <!-- <option value="single-days">Days</option> -->
-          <!-- <option value="single-hours">Hours</option> -->
-          <!-- <option value="single-minutes">Minutes</option> -->
-        </optgroup>
-      </select>
-    </div>
+  <div class="text-center text-6xl md:text-7xl font-light">
+    <div id="mainTimer">Loading...</div>
+    <div id="unitLabel" class="text-sm uppercase mt-2 tracking-widest text-pink-200">Calculating...</div>
+  </div>
 
-    <h1
-      class="text-5xl md:text-8xl romantic-font gradient-text mb-4 text-center"
-    >
-      Forever & Always
-    </h1>
-    <p class="text-lg md:text-xl italic text-pink-100 mb-6 text-center">
-      Our journey of love began...
-    </p>
+  <blockquote id="loveQuote" class="mt-8 italic text-pink-100 text-center text-base max-w-lg mx-auto"></blockquote>
 
-    <div class="text-center text-6xl md:text-7xl font-light">
-      <div id="mainTimer">Loading...</div>
-      <div
-        id="unitLabel"
-        class="text-sm uppercase mt-2 tracking-widest text-pink-200"
-      >
-        Calculating...
-      </div>
-    </div>
-
-    <blockquote
-      id="loveQuote"
-      class="mt-8 italic text-pink-100 text-center text-base max-w-lg mx-auto"
-    ></blockquote>
-
-    <script>
-      const dateDisplay = document.getElementById("dateDisplay");
-      const mainTimer = document.getElementById("mainTimer");
-      const unitLabel = document.getElementById("unitLabel");
-      const unitSelect = document.getElementById("unitSelect");
-      const loveQuote = document.getElementById("loveQuote");
-
-      const startDate = new Date("2025-04-25T23:30:00");
-      let timerInterval = null;
-
-      async function fetchQuote() {
-        try {
-          const res = await fetch(
-            "https://api.quotable.io/random?tags=love&maxLength=70"
-          );
-          const data = await res.json();
-          loveQuote.textContent = `“${data.content}” — ${data.author}`;
-        } catch (e) {
-          loveQuote.textContent =
-            "Every moment with you is a beautiful memory in the making.";
-        }
-      }
-
-      fetchQuote();
-
-      function plural(unit, value) {
-        return value === 1 ? unit : unit + "s";
-      }
-
-      function updateDisplay() {
-        const now = new Date();
-        const diff = now - startDate;
-
-        let seconds = Math.floor(diff / 1000);
-        const minutes = Math.floor(seconds / 60);
-        const hours = Math.floor(minutes / 60);
-        const days = Math.floor(hours / 24);
-        const weeks = (days / 7).toFixed(1);
-        const months = (days / 30.44).toFixed(1);
-        const years = Math.floor(days / 365.25).toFixed(1);
-        const remainingHours = hours % 24;
-
-        const unitMode = unitSelect.value;
-
-        if (unitMode === "full") {
-          const remainingMonths = months % 12;
-          const remainingDays = Math.floor(days % 30.44);
-          mainTimer.textContent = `${years}y ${remainingMonths}m ${remainingDays}d`;
-          unitLabel.textContent = "Years Months Days";
-        } else if (unitMode === "ym") {
-          const remainingMonths = months % 12;
-          mainTimer.textContent = `${years}y ${remainingMonths}m`;
-          unitLabel.textContent = "Years & Months";
-        } else if (unitMode === "days-hours") {
-          mainTimer.textContent = `${days}d ${remainingHours}h`;
-          unitLabel.textContent = "Days & Hours";
-        } else if (unitMode === "single-days") {
-          mainTimer.textContent = days;
-          unitLabel.textContent = plural("Day", days);
-        } else if (unitMode === "single-hours") {
-          mainTimer.textContent = hours;
-          unitLabel.textContent = plural("Hour", hours);
-        } else if (unitMode === "single-minutes") {
-          mainTimer.textContent = minutes;
-          unitLabel.textContent = plural("Minute", minutes);
-        } else if (unitMode === "single-weeks") {
-          mainTimer.textContent = weeks;
-          unitLabel.textContent = plural("Week", weeks);
-        } else if (unitMode === "single-months") {
-          mainTimer.textContent = months;
-          unitLabel.textContent = plural("Month", months);
-        } else if (unitMode === "single-years") {
-          mainTimer.textContent = years;
-          unitLabel.textContent = plural("Year", years);
-        }
-
-        // Accessory label (e.g., ago/past/etc)
-        let displayString = "";
-        if (years > 0) displayString = `${years} ${plural("year", years)} ago`;
-        else if (months > 0)
-          displayString = `${months} ${plural("month", months)} ago`;
-        else if (weeks > 0)
-          displayString = `${weeks} ${plural("week", weeks)} ago`;
-        else if (days > 0) displayString = `${days} ${plural("day", days)} ago`;
-        else if (hours > 0)
-          displayString = `${hours} ${plural("hour", hours)} ago`;
-        else if (minutes > 0)
-          displayString = `${minutes} ${plural("minute", minutes)} ago`;
-        else displayString = "just now";
-
-        dateDisplay.textContent = `Our hearts met on ${displayString}`;
-      }
-
-      updateDisplay();
-      if (timerInterval) clearInterval(timerInterval);
-      timerInterval = setInterval(updateDisplay, 1000);
-    </script>
-  </body>
+  <script src="script.js"></script>
+</body>
 </html>

@@ -1,0 +1,36 @@
+body {
+  font-family: "Poppins", sans-serif;
+  background: radial-gradient(circle, #1f1c2c, #928dab);
+  color: #fff;
+  overflow: hidden;
+}
+
+.romantic-font {
+  font-family: "Parisienne", cursive;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #fbc2eb, #a6c1ee);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.unit-toggle {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  font-size: 0.7rem;
+}
+
+option, optgroup {
+  background: #1f1c2c;
+  color: #fff;
+  font-size: 0.7rem;
+}
+
+.bg-glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 1rem;
+}
