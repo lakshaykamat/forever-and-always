@@ -59,7 +59,7 @@
         right: 20px;
         font-size: 0.7rem;
       }
-      option {
+      option,optgroup {
         background: #1f1c2c;
         color: #fff;
         font-size: 0.7rem;
@@ -80,15 +80,19 @@
 
     <div class="unit-toggle">
       <select id="unitSelect" class="p-2 rounded bg-white/10 text-white">
-        <option value="single-weeks" >Weeks</option>
-        <option value="full">Years, Months, Days</option>
-        <option value="ym">Years & Months</option>
-        <option value="days-hours" selected>Days & Hours</option>
-        <option value="single-days">Days</option>
-        <option value="single-hours">Hours</option>
-        <option value="single-minutes">Minutes</option>
-        <option value="single-months">Months</option>
-        <option value="single-years">Years</option>
+        <optgroup label="Multiple Units">
+          <option value="ym">Years & Months</option>
+          <option value="full">Years, Months, Days</option>
+          <option value="days-hours" selected>Days & Hours</option>
+        </optgroup>
+        <optgroup label="Single Units">
+          <option value="single-years">Years</option>
+          <option value="single-months">Months</option>
+          <option value="single-weeks" >Weeks</option>
+          <option value="single-days">Days</option>
+          <!-- <option value="single-hours">Hours</option> -->
+          <!-- <option value="single-minutes">Minutes</option> -->
+        </optgroup>
       </select>
     </div>
 
