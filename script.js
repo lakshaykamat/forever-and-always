@@ -33,8 +33,8 @@ function updateDisplay() {
   const hours = Math.floor(minutes / 60);
   const days = Math.floor(hours / 24);
   const weeks = (days / 7).toFixed(1);
-  const months = (days / 30.44).toFixed(1);
-  const years = Math.floor(days / 365.25).toFixed(1);
+  const months = (days / 30.44).toFixed(2);
+  const years = (days / 365).toFixed(3);
   const remainingHours = hours % 24;
   const unitMode = unitSelect.value;
 
