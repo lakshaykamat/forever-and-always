@@ -4,7 +4,7 @@ const unitLabel = document.getElementById("unitLabel");
 const unitSelect = document.getElementById("unitSelect");
 const loveQuote = document.getElementById("loveQuote");
 
-const startDate = new Date("2025-04-25T23:30:00");
+const startDate = new Date("2025-04-25");
 let timerInterval = null;
 
 function plural(unit, value) {
@@ -14,7 +14,7 @@ function plural(unit, value) {
 async function fetchQuote() {
   try {
     const res = await fetch(
-      "https://api.quotable.io/random?tags=love&maxLength=70"
+      "http://api.quotable.io/random?tags=love&maxLength=70"
     );
     const data = await res.json();
     loveQuote.textContent = `“${data.content}” — ${data.author}`;
